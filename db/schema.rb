@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160405142928) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.text     "street",                     null: false

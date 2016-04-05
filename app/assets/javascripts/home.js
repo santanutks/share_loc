@@ -2,7 +2,8 @@ var shareLoc = shareLoc || {};
 
 shareLoc = {
   initMap: function(){
-    $.getJSON('/', function(data){
+    var json_path = $('#map').data('json-url');
+    $.getJSON(json_path, function(data){
       var center = data[0] ? data[0].coordinate : [0, 0];
       var map = new ol.Map({
         target: 'map',
@@ -30,6 +31,8 @@ shareLoc = {
         }));
       });
     });
+    
+    $('[data-toggle="popover"]').popover();
   }
 }
 

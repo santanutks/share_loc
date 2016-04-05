@@ -5,6 +5,7 @@ class Location < ActiveRecord::Base
   has_many :shared_locations, dependent: :delete_all
 
   validates :user, :street, :city, :state, :country, presence: true
+  scope :not_private, -> { where(is_private: false) }
 
   geocoded_by :full_street_address
   after_validation :geocode

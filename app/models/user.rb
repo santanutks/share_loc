@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :locations,   inverse_of: :user, dependent: :destroy
   has_many :friendships, inverse_of: :user, dependent: :delete_all
-  has_many :friends, -> {uniq}, through: :friendships, source: :user
+  has_many :friends, through: :friendships, foreign_key: :friend_id
 
   has_many :shared_locations
 

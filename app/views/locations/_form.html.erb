@@ -15,10 +15,12 @@
   <%= f.select :country, Carmen::Country.all.collect(&:name).sort, {}, class: 'form-control', required: true %>
 </div>
 <div class="form-group">
-  <%= f.label :is_private %>
-  <%= f.check_box :is_private %>
+  <%= f.label :is_private do %>
+    <%= f.check_box :is_private %>
+    Do you want to make this location private?
+  <% end %>
 </div>
-<div class="form-group share-with">
+<div class="form-group share-with" style="display:none;">
   <%= f.label :friend_ids, 'Share With' %>
   <%= f.select :friend_ids, current_user.friends.pluck(:username, :id), {}, class: 'form-control', multiple: true %>
 </div>
