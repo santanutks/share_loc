@@ -11,24 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405111144) do
+ActiveRecord::Schema.define(version: 20160405142928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "locations", force: :cascade do |t|
+  create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.text     "street",     null: false
-    t.string   "city",       null: false
-    t.string   "state",      null: false
-    t.string   "country",    null: false
-    t.float    "latitude"
-    t.float    "longitude"
+    t.integer  "friend_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.text     "street",                     null: false
+    t.string   "city",                       null: false
+    t.string   "state",                      null: false
+    t.string   "country",                    null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "is_private", default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
+
+  create_table "shared_locations", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "location_id", null: false
+    t.integer  "friend_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shared_locations", ["user_id", "location_id", "friend_id"], name: "index_shared_locations_on_user_id_and_location_id_and_friend_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",                            null: false
@@ -50,4 +68,10 @@ ActiveRecord::Schema.define(version: 20160405111144) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "locations", "users"
+  add_foreign_key "shared_locations", "locations"
+  add_foreign_key "shared_locations", "users"
+  add_foreign_key "shared_locations", "users", column: "friend_id"
 end

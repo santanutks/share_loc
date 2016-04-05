@@ -1,0 +1,11 @@
+class CreateFriendships < ActiveRecord::Migration
+  def change
+    create_table :friendships do |t|
+      t.belongs_to :user, null: false
+      t.integer    :friend_id, null: false
+      t.timestamps null: false
+    end
+    add_foreign_key :friendships, :users
+    add_foreign_key :friendships, :users, column: :friend_id
+  end
+end

@@ -4,8 +4,8 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = current_user.locations.build(location_params)
-    if @location.save
+    @location = current_user.locations.build
+    if @location.update(location_params)
       redirect_to root_path
     else
       render :new
@@ -14,6 +14,6 @@ class LocationsController < ApplicationController
 
   private
   def location_params
-    params.require(:location).permit(:street, :city, :state, :country)
+    params.require(:location).permit(:street, :city, :state, :country, :is_private, friend_ids: [])
   end
 end

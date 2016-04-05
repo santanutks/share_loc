@@ -1,5 +1,8 @@
 class Location < ActiveRecord::Base
+  attr_accessor :friend_ids
+
   belongs_to :user
+  has_many :shared_locations, dependent: :delete_all
 
   validates :user, :street, :city, :state, :country, presence: true
 
@@ -12,6 +15,12 @@ class Location < ActiveRecord::Base
 
   def long_lat_json
     { address: full_street_address, coordinate: [longitude, latitude] }
+  end
+
+  def friend_ids=(arg)
+    User.where(id: arg).each do |friend|
+      self.shared_locations.build(user: user, friend: friend)
+    end
   end
 
   private

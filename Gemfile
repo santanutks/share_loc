@@ -32,6 +32,7 @@ group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'spring-commands-rspec'
+  gem 'faker'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.

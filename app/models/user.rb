@@ -6,5 +6,13 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
-  has_many :locations
+  has_many :locations,   inverse_of: :user, dependent: :destroy
+  has_many :friendships, inverse_of: :user, dependent: :delete_all
+  has_many :friends, -> {uniq}, through: :friendships, source: :user
+
+  has_many :shared_locations
+
+  def accessible_locations
+    Location.joins('left join shared_locations on shared_locations.location_id = locations.id').where('locations.user_id = ? OR shared_locations.friend_id = ?', id, id)
+  end
 end

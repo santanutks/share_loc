@@ -3,7 +3,7 @@ var shareLoc = shareLoc || {};
 shareLoc = {
   initMap: function(){
     $.getJSON('/', function(data){
-      var center = data[0].coordinate || [0, 0];
+      var center = data[0] ? data[0].coordinate : [0, 0];
       var map = new ol.Map({
         target: 'map',
         layers: [

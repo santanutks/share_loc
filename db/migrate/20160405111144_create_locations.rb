@@ -8,7 +8,9 @@ class CreateLocations < ActiveRecord::Migration
       t.string     :country, null: false
       t.float      :latitude
       t.float      :longitude
+      t.boolean    :is_private, null: false, default: false
       t.timestamps null: false
     end
+    add_foreign_key :locations, :users
   end
 end
