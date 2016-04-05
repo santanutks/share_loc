@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: santanu
+  password: santanu
+  host: localhost
+
+development:
+  <<: *default
+  database: share_loc_development
+
+test:
+  <<: *default
+  database: share_loc_test
+
+production:
+  <<: *default
+  database: share_loc_production
+  username: share_loc
+  password: <%= ENV['SHARE_LOC_DATABASE_PASSWORD'] %>

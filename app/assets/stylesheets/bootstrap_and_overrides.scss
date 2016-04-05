@@ -1,0 +1,30 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html, body{
+  height: 100%;
+  header .navbar{
+    margin-bottom: 0;
+  }
+}
+main {
+  @extend .container;
+  background-color: #eee;
+  padding-bottom: 80px;
+  width: 100%;
+  height: 85%;
+}
+
+footer {
+  height: 7%;
+  padding: 10px 0;
+  p {
+    margin: 0;
+  }
+}
+
+.navbar-inverse{
+  background-color: #bbdefb;
+  border-color: #ccc;
+}

@@ -1,0 +1,6 @@
+Rails.application.routes.draw do
+  devise_for :installs
+  root to: 'home#index'
+
+  devise_for :users
+end
