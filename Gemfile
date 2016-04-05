@@ -16,6 +16,9 @@ gem 'jbuilder', '~> 2.0'
 # authentication
 gem 'devise'
 
+gem 'carmen'
+gem 'geocoder'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
