@@ -9,4 +9,16 @@ User.all.each do |user|
   end
 end
 
-p "Log in using #{User.first.email}/12345678"
+locations = [
+             { street: 'JA-1 Sector III, Salt Lake City', city: 'Kolkata', state: 'West Bengal', country: 'India'},
+             { street: 'Janjikar Street, Near Crawford Market', city: 'Mumbai', state: 'Maharastra', country: 'India'},
+             { street: 'Netaji Subhash Marg, Chandni Chowk', city: 'Delhi', state: 'Delhi', country: 'India' }
+            ]
+
+user = User.first
+locations.each do |loc|
+  user.locations.create(loc)
+end
+
+
+p "Log in using #{user.email}/12345678"

@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :locations, only: [:new, :create]
-  get 'users/:username', to: 'users#show'
+  get 'users/:username', to: 'users#show', as: :user
 end

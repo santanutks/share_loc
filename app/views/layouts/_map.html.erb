@@ -1,2 +1,14 @@
-<div id="map" class="map" data-json-url="<%= request.fullpath %>"></div>
+<div class="row">
+  <div class="col-md-10">
+    <div id="map" class="map" data-json-url="<%= request.fullpath %>"></div>
+  </div>
+  <div class="col-md-2">
+    <h5>Other Users</h5>
+    <ul class="list-unstyled">
+      <% User.where.not(id: current_user.id).each do |user| %>
+        <li><%= link_to user.username, user_path(user.username)%></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 <%= image_tag 'marker.png', class: 'marker hidden'%>

@@ -32,13 +32,11 @@ shareLoc = {
       });
     });
     
-    $('[data-toggle="popover"]').popover();
+    setTimeout(function(){
+      $('[data-toggle="popover"]').popover();
+    }, 300);
   }
 }
-
-$(function(){
-  $('[data-toggle="popover"]').popover();
-})
 
 shareLoc.initMap();
   
